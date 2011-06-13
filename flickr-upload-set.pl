@@ -13,6 +13,7 @@ use Getopt::Long;
 use IO::File;
 use Pod::Usage;
 
+my $pkg = 'flickr-upload-set';
 # get your own key and secret from http://www.flickr.com/services/api/key.gne
 #my $api_key = '8dcf37880da64acfe8e30bb1091376b7';
 #my $not_so_secret = '2f3695d0562cdac7';
@@ -130,10 +131,10 @@ pod2usage(1) unless @ARGV;
 $args{'tags'} = join( " ", @tags ) if @tags;
 
 # open log file
-my $log = "$ENV{HOME}/flickr-upload-set.done";
+my $log = "$ENV{HOME}/$pkg/$pkg.done";
 my $log_fh = IO::File->new(">>$log");
 if (!defined($log_fh)) {
-    warn("flickr-upload_set: failed to open log file $log: $!");
+    warn("$pkg: failed to open log file $log: $!");
     exit(20);
 }
 
