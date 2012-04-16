@@ -1,0 +1,4 @@
+This repo contains scripts to upload photos from iPhoto into Flickr photo sets.
+
+flickr-diff.pl         check log to see which photos have not been uploaded
+flickr-upload-set.pl   upload photos into sets
