@@ -146,9 +146,16 @@ $| = 1;
 while( my $photo = shift @ARGV ) {
 	my $rc;
 
+	my $photo_size = (stat($photo))[7];
+        # see if photo is movie and movie is too long (approximately)
+        if ($photo =~ m/\.mov/i && $photo_size > 152230886) {
+            # flickr only accepts moves less than 90 seconds
+            print("File too large: $photo\n");
+            next;
+        }
+
 	if ($progress) {
 		$HTTP::Request::Common::DYNAMIC_FILE_UPLOAD = 1;
-		my $photo_size = (stat($photo))[7];
 		my $req = $ua->make_upload_request( 'photo' => $photo, %args );
 		my $gen = $req->content();
 		die unless ref($gen) eq "CODE";
